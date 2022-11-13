@@ -46,4 +46,10 @@ public class AppointmentServiceImpl implements AppointmentService {
             return appointmentMapper.mapToAppointmentDtoList(appointmentRepository.findByClientOrMaster(userId));
         }
     }
+
+    @Override
+    public AppointmentDto findAppointmentById(Long appointmentId) {
+        log.info("Layer: {}, Getting Appointment with Id: {}", this.getClass().getSimpleName(), appointmentId);
+        return appointmentMapper.mapToAppointmentDto(appointmentRepository.findById(appointmentId));
+    }
 }

@@ -28,6 +28,11 @@ public class AppointmentController {
         return appointmentService.updateAppointment(appointmentDto);
     }
 
+    @GetMapping("/{appointmentId}")
+    public AppointmentDto getAppointment(@PathVariable Long appointmentId) {
+        log.info("Layer: {}, Getting Appointment with Id: {}", this.getClass().getSimpleName(), appointmentId);
+        return appointmentService.findAppointmentById(appointmentId);
+    }
     @GetMapping
     public List<AppointmentDto> getAppointments(@PathVariable Long userId) {
         log.info("Layer: {}, Getting All Appointments for User with Id: {}", this.getClass().getSimpleName(), userId);

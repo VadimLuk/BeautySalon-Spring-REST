@@ -10,4 +10,6 @@ public interface AppointmentService {
     AppointmentDto updateAppointment(AppointmentDto appointmentDto);
 
     List<AppointmentDto> findAppointmentsByUser(Long userId);
+
+    AppointmentDto findAppointmentById(Long appointmentId);
 }
