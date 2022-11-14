@@ -22,7 +22,7 @@ public class AppointmentController {
         return appointmentService.bookAppointment(appointmentDto);
     }
 
-    @PutMapping("/{appointmentId}")
+    @PatchMapping("/{appointmentId}")
     public AppointmentDto updateAppointment(@RequestBody AppointmentDto appointmentDto) {
         log.info("Layer: {}, Updating Appointment: {}", this.getClass().getSimpleName(), appointmentDto);
         return appointmentService.updateAppointment(appointmentDto);

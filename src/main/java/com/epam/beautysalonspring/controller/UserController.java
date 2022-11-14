@@ -23,7 +23,7 @@ public class UserController {
     }
 
     //Authorized
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public UserDto updateUser(@RequestBody UserDto userDto) {
         log.info("Layer: {}, Updating User: {}", this.getClass().getSimpleName(), userDto);
         return userService.updateUser(userDto);

@@ -25,7 +25,7 @@ public class CategoryController {
         return categoryService.createCategory(categoryDto);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public CategoryDto updateCategory(@RequestBody @Validated(OnUpdate.class) CategoryDto categoryDto) {
         log.info("Layer: {}, Updating Category: {}", this.getClass().getSimpleName(), categoryDto);
         return categoryService.updateCategory(categoryDto);

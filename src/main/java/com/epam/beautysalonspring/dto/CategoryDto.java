@@ -18,7 +18,7 @@ public class CategoryDto {
     @NotNull(groups = OnUpdate.class)
     private Long id;
 
-    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
+    @NotBlank(groups = OnCreate.class)
     @Size(min = 3, max = 40)
     private String name;
 }

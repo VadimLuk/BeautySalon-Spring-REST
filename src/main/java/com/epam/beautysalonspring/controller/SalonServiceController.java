@@ -23,7 +23,7 @@ public class SalonServiceController {
         return salonServiceService.createSalonService(salonServiceDto);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public SalonServiceDto updateSalonService(@RequestBody SalonServiceDto salonServiceDto) {
         log.info("Layer: {}, Updating SalonService: {}", this.getClass().getSimpleName(), salonServiceDto);
         return salonServiceService.updateSalonService(salonServiceDto);
