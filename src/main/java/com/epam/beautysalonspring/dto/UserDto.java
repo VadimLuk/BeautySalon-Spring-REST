@@ -1,5 +1,6 @@
 package com.epam.beautysalonspring.dto;
 
+import com.epam.beautysalonspring.validation.PhoneNumber;
 import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.dto.groups.OnUpdate;
 import lombok.Builder;
@@ -23,10 +24,6 @@ public class UserDto {
     @Size(min = 6, max = 30)
     private String password;
 
-    @NotBlank(groups = OnCreate.class)
-    @Size(min = 6, max = 30)
-    private String repeatPassword;
-
     private String role;
 
     @NotBlank(groups = OnCreate.class)
@@ -44,6 +41,7 @@ public class UserDto {
     private String description;
 
     @NotBlank(groups = OnCreate.class)
+    @PhoneNumber
     private String phoneNumber;
 
     @Null(groups = OnCreate.class)
