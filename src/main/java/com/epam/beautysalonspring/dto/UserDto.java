@@ -1,6 +1,6 @@
 package com.epam.beautysalonspring.dto;
 
-import com.epam.beautysalonspring.validation.PhoneNumber;
+import com.epam.beautysalonspring.validation.annotations.PhoneNumber;
 import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.dto.groups.OnUpdate;
 import lombok.Builder;

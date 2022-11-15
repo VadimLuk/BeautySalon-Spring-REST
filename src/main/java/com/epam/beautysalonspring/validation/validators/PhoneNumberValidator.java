@@ -1,5 +1,6 @@
-package com.epam.beautysalonspring.validation;
+package com.epam.beautysalonspring.validation.validators;
 
+import com.epam.beautysalonspring.validation.annotations.PhoneNumber;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;

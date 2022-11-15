@@ -1,4 +1,6 @@
-package com.epam.beautysalonspring.validation;
+package com.epam.beautysalonspring.validation.annotations;
+
+import com.epam.beautysalonspring.validation.validators.PhoneNumberValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
