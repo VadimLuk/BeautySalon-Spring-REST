@@ -3,6 +3,7 @@ package com.epam.beautysalonspring.controller;
 import com.epam.beautysalonspring.dto.AppointmentDto;
 import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.dto.groups.OnUpdate;
+import com.epam.beautysalonspring.exceptions.EntityNotFoundException;
 import com.epam.beautysalonspring.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class AppointmentController {
         return appointmentService.findAppointmentById(appointmentId);
     }
     @GetMapping
-    public List<AppointmentDto> getAppointments(@PathVariable Long userId) {
+    public List<AppointmentDto> getAppointments(@PathVariable Long userId) throws EntityNotFoundException {
         log.info("Layer: {}, Getting All Appointments for User with Id: {}", this.getClass().getSimpleName(), userId);
         return appointmentService.findAppointmentsByUser(userId);
     }
