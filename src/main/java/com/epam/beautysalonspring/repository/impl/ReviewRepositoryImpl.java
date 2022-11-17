@@ -5,6 +5,7 @@ import com.epam.beautysalonspring.repository.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     public Review create(Review review) {
         log.info("Layer: {}, Creating Review: {}", this.getClass().getSimpleName(), review);
         review.setId(entityId++);
+        review.setReviewDateTime(LocalDateTime.now());
         reviews.put(review.getId(), review);
         return reviews.get(review.getId());
     }

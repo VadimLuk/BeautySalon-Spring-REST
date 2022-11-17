@@ -1,9 +1,12 @@
 package com.epam.beautysalonspring.controller;
 
 import com.epam.beautysalonspring.dto.SubcategoryDto;
+import com.epam.beautysalonspring.dto.groups.OnCreate;
+import com.epam.beautysalonspring.dto.groups.OnUpdate;
 import com.epam.beautysalonspring.service.SubcategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +20,13 @@ public class SubcategoryController {
     private final SubcategoryService subcategoryService;
 
     @PostMapping
-    public SubcategoryDto createSubcategory(@RequestBody SubcategoryDto subcategoryDto) {
+    public SubcategoryDto createSubcategory(@RequestBody @Validated(OnCreate.class) SubcategoryDto subcategoryDto) {
         log.info("Layer: {}, Creating Subcategory: {}", this.getClass().getSimpleName(), subcategoryDto);
         return subcategoryService.createSubcategory(subcategoryDto);
     }
 
-    @PutMapping("/{id}")
-    public SubcategoryDto updateSubcategory(@RequestBody SubcategoryDto subcategoryDto) {
+    @PatchMapping("/{id}")
+    public SubcategoryDto updateSubcategory(@RequestBody @Validated(OnUpdate.class) SubcategoryDto subcategoryDto) {
         log.info("Layer: {}, Updating Subcategory: {}", this.getClass().getSimpleName(), subcategoryDto);
         return subcategoryService.updateSubcategory(subcategoryDto);
     }

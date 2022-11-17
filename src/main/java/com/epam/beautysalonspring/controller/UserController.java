@@ -2,9 +2,12 @@ package com.epam.beautysalonspring.controller;
 
 import com.epam.beautysalonspring.dto.UserDto;
 import com.epam.beautysalonspring.dto.UserStaffDto;
+import com.epam.beautysalonspring.dto.groups.OnCreate;
+import com.epam.beautysalonspring.dto.groups.OnUpdate;
 import com.epam.beautysalonspring.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,14 +20,14 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping()
-    public UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@RequestBody @Validated(OnCreate.class) UserDto userDto) {
         log.info("Layer: {}, Creating User: {}", this.getClass().getSimpleName(), userDto);
         return userService.createUser(userDto);
     }
 
     //Authorized
-    @PutMapping("/{id}")
-    public UserDto updateUser(@RequestBody UserDto userDto) {
+    @PatchMapping("/{id}")
+    public UserDto updateUser(@RequestBody @Validated(OnUpdate.class) UserDto userDto) {
         log.info("Layer: {}, Updating User: {}", this.getClass().getSimpleName(), userDto);
         return userService.updateUser(userDto);
     }
