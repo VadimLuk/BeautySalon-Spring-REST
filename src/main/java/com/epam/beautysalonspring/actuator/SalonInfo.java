@@ -16,9 +16,9 @@ public class SalonInfo implements InfoContributor {
     @Override
     public void contribute(Info.Builder builder) {
         Map<String, String> salonDetails = new HashMap<>();
-        salonDetails.put("ProjectName", "EpamBeautySalon");
-        salonDetails.put("DateTime", LocalDateTime.now().toString());
-        salonDetails.put("CreatedBy", "Vadym Lukianikhin");
-        builder.withDetail("SalonInfo",salonDetails);
+        salonDetails.put("name", "EpamBeautySalon");
+        salonDetails.put("currentDateTime", LocalDateTime.now().toString());
+        salonDetails.put("createdBy", "Vadym Lukianikhin");
+        builder.withDetail("ProjectInfo",salonDetails);
     }
 }
