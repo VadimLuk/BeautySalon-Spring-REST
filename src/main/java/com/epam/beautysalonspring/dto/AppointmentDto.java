@@ -23,6 +23,7 @@ public class AppointmentDto {
     private Long masterId;
 
     @NotNull(groups = OnCreate.class)
+    @Null(groups = OnUpdate.class)
     private Long clientId;
 
     @NotNull(groups = OnCreate.class)
@@ -32,6 +33,5 @@ public class AppointmentDto {
     @NotNull(groups = OnCreate.class)
     private LocalDateTime bookedDateTime;
 
-    @Null(groups = OnCreate.class)
     private String status;
 }
