@@ -1,15 +1,17 @@
 package com.epam.beautysalonspring.repository;
 
 import com.epam.beautysalonspring.model.SalonService;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Set;
 
-public interface SalonServiceRepository {
-    SalonService create(SalonService salonService);
 
-    SalonService update(SalonService salonService);
+@Repository
+public interface SalonServiceRepository extends CrudRepository<SalonService, Long> {
+    SalonService findSalonServiceById(Long id);
 
-    List<SalonService> findBySubcategory(Long subcategoryId);
-
-    SalonService findById(Long id);
+    @Query("select s from SalonService s where :subcategoryId is null OR s.subcategory.id = :subcategoryId")
+    Set<SalonService> findAllSalonServicesOrBySubcategory(Long subcategoryId);
 }
