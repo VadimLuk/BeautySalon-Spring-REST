@@ -22,6 +22,4 @@ public @interface PhoneNumber {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
-    String regexp() default "\\d{12}";
 }
