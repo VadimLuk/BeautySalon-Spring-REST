@@ -18,7 +18,7 @@ public class RestTemplateConfig {
         return restTemplate;
     }
 
-    // Fix: Patch Request doesn't supported in plain rest template
+    // Fix: Patch Request isn't supported in plain rest template
     @Bean(name = "requestFactory")
     public HttpComponentsClientHttpRequestFactory requestFactory() {
         return new HttpComponentsClientHttpRequestFactory();
