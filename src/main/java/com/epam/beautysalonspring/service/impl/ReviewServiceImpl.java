@@ -22,13 +22,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewDto> getAll() {
         log.info("Layer: {}, Getting Reviews", this.getClass().getSimpleName());
-        return reviewMapper.mapToReviewDtoList(reviewRepository.findAll());
+
+        return reviewMapper.mapToReviewDtoList(
+                (List<Review>) reviewRepository.findAll());
     }
 
     @Override
     public ReviewDto create(ReviewDto reviewDto) {
         log.info("Layer: {}, Creating Review: {}", this.getClass().getSimpleName(), reviewDto);
-        Review review = reviewRepository.create(reviewMapper.mapToReview(reviewDto));
+
+        Review review = reviewRepository.save(reviewMapper.mapToReview(reviewDto));
         return reviewMapper.mapToReviewDto(review);
     }
 }
