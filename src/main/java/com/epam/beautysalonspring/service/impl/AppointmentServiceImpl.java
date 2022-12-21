@@ -16,7 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Slf4j
 @Service
@@ -35,10 +37,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDto updateAppointment(AppointmentDto appointmentDto) {
+    public AppointmentDto updateAppointment(Long appointmentId, AppointmentDto appointmentDto) throws EntityNotFoundException {
         log.info("Layer: {}, Updating Appointment: {}", this.getClass().getSimpleName(), appointmentDto);
 
-        Appointment appointment = appointmentRepository.save(appointmentMapper.mapToAppointment(appointmentDto));
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new EntityNotFoundException("Appointment not found"));
+        appointmentMapper.updateAppointmentFromAppointmentDto(appointmentDto, appointment);
+
+        appointment = appointmentRepository.save(appointment);
         return appointmentMapper.mapToAppointmentDto(appointment);
     }
 
@@ -55,12 +61,15 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Page<AppointmentDto> findAppointmentsByUserFilteredAndPaginated(Long userId,
                                                                            AppointmentStatus status,
-                                                                           LocalDateTime bookedDateTimeStart,
-                                                                           LocalDateTime bookedDateTimeEnd,
+                                                                           LocalDate bookedDateStart,
+                                                                           LocalDate bookedDateEnd,
                                                                            Pageable pageable) throws EntityNotFoundException {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        LocalDateTime bookedDateTimeStart = bookedDateStart.atStartOfDay();
+        LocalDateTime bookedDateTimeEnd = bookedDateEnd.atTime(LocalTime.MAX);
 
         if (user.getRole() == Role.CLIENT) {
             return appointmentMapper.mapToAppointmentDtoPage(

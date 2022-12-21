@@ -14,15 +14,14 @@ import java.time.LocalDateTime;
 @Repository
 public interface AppointmentRepository extends PagingAndSortingRepository<Appointment, Long> {
 
-    @Query("select a from Appointment a " +
-            "where a.master = ?1 or a.client = ?1 and a.status = ?2 and a.bookedDateTime between ?3 and ?4")
+    @Query("select a from Appointment a where (a.master = ?1 or a.client = ?1) and (a.status = ?2 or ?2 is null) and (a.bookedDateTime between ?3 and ?4)")
     Page<Appointment> findByMasterOrClientAndStatusAndBookedDateTimeBetween(User user,
                                                                             AppointmentStatus status,
                                                                             LocalDateTime bookedDateTimeStart,
                                                                             LocalDateTime bookedDateTimeEnd,
                                                                             Pageable pageable);
 
-    @Query("select a from Appointment a where a.status = ?1 and a.bookedDateTime between ?2 and ?3")
+    @Query("select a from Appointment a where (a.status = ?1 or ?1 is null) and a.bookedDateTime between ?2 and ?3")
     Page<Appointment> findByStatusAndBookedDateTimeBetween(AppointmentStatus status,
                                                            LocalDateTime bookedDateTimeStart,
                                                            LocalDateTime bookedDateTimeEnd,
