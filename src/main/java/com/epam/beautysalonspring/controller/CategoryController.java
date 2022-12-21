@@ -3,6 +3,7 @@ package com.epam.beautysalonspring.controller;
 import com.epam.beautysalonspring.dto.CategoryDto;
 import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.dto.groups.OnUpdate;
+import com.epam.beautysalonspring.exceptions.EntityNotFoundException;
 import com.epam.beautysalonspring.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public CategoryDto getCategory(@PathVariable Long id) {
+    public CategoryDto getCategory(@PathVariable Long id) throws EntityNotFoundException {
         log.info("Layer: {}, Getting Category with ID: {}", this.getClass().getSimpleName(), id);
         return categoryService.getCategoryById(id);
     }
