@@ -15,6 +15,7 @@ public interface SubcategoryMapper {
     @Mapping(target = "category", source = "categoryId")
     Subcategory mapToSubcategory(SubcategoryDto subcategoryDto);
 
+    @Mapping(target = "categoryId", source = "category.id")
     SubcategoryDto mapToSubcategoryDto(Subcategory subcategory);
 
     List<SubcategoryDto> mapToSubcategoryDtoList(List<Subcategory> byCategory);

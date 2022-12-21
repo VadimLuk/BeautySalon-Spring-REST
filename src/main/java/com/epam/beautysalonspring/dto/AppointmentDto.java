@@ -12,25 +12,33 @@ import java.time.LocalDateTime;
 @Builder
 public class AppointmentDto {
 
-    @Null(groups = OnCreate.class)
-    @NotNull(groups = OnUpdate.class)
+    @Null(groups = {OnCreate.class, OnUpdate.class})
     private Long id;
 
     @NotNull(groups = OnCreate.class)
     private Long salonServiceId;
 
+    private String salonServiceName;
+
     @NotNull(groups = OnCreate.class)
     private Long masterId;
+
+    private String masterName;
 
     @NotNull(groups = OnCreate.class)
     @Null(groups = OnUpdate.class)
     private Long clientId;
 
+    private String clientFirstName;
+
+    private String clientLastName;
+
     @NotNull(groups = OnCreate.class)
     private Integer cost;
 
-    @FutureOrPresent
+
     @NotNull(groups = OnCreate.class)
+    @FutureOrPresent
     private LocalDateTime bookedDateTime;
 
     private String status;

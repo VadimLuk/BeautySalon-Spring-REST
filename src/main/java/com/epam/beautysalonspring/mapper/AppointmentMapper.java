@@ -27,12 +27,19 @@ public interface AppointmentMapper {
     Appointment mapToAppointment(AppointmentDto appointmentDto);
 
 
+    @Mappings({
+            @Mapping(target = "salonServiceName", source = "salonService.name"),
+            @Mapping(target = "masterId", source = "master.id"),
+            @Mapping(target = "masterName", source = "master.firstName"),
+            @Mapping(target = "clientId", source = "client.id"),
+            @Mapping(target = "clientFirstName", source = "client.firstName"),
+            @Mapping(target = "clientLastName", source = "client.lastName")
+    })
     AppointmentDto mapToAppointmentDto(Appointment appointment);
 
     @Mappings({
             @Mapping(target = "status", source = "status", qualifiedByName = "toEnumCase"),
             @Mapping(target = "master", source = "masterId"),
-            @Mapping(target = "client", source = "clientId"),
             @Mapping(target = "salonService", source = "salonServiceId")
     })
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
