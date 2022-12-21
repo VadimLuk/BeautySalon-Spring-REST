@@ -29,14 +29,16 @@ public class SubcategoryServiceImpl implements SubcategoryService {
         log.info("Layer: {}, Creating Subcategory: {}", this.getClass().getSimpleName(), subcategoryDto);
         Subcategory subcategory = subcategoryRepository.save(subcategoryMapper.mapToSubcategory(subcategoryDto));
 
+        //TODO Maybe add CategoryId, then findCategory and add to SubcategoriesSet
+
         return subcategoryMapper.mapToSubcategoryDto(subcategory);
     }
 
     @Override
     public SubcategoryDto updateSubcategory(SubcategoryDto subcategoryDto) {
         log.info("Layer: {}, Updating Subcategory: {}", this.getClass().getSimpleName(), subcategoryDto);
-        Subcategory subcategory = subcategoryRepository.save(subcategoryMapper.mapToSubcategory(subcategoryDto));
 
+        Subcategory subcategory = subcategoryRepository.save(subcategoryMapper.mapToSubcategory(subcategoryDto));
         return subcategoryMapper.mapToSubcategoryDto(subcategory);
     }
 

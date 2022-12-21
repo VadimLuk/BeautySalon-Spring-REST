@@ -26,8 +26,10 @@ public class SalonServiceServiceImpl implements SalonServiceService {
     @Override
     public SalonServiceDto createSalonService(SalonServiceDto salonServiceDto) {
         log.info("Layer: {}, Creating SalonService: {}", this.getClass().getSimpleName(), salonServiceDto);
-
         SalonService salonService = salonServiceRepository.save(salonServiceMapper.mapToSalonService(salonServiceDto));
+
+        //TODO Maybe add CategoryId,SubcategoryId, then findCategory getSubcategories and add SalonService
+
         return salonServiceMapper.mapToSalonServiceDto(salonService);
     }
 
