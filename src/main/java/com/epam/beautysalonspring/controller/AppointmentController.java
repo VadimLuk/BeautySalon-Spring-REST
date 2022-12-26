@@ -9,8 +9,7 @@ import com.epam.beautysalonspring.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -49,38 +48,17 @@ public class AppointmentController {
         return appointmentService.findAppointmentById(appointmentId);
     }
 
-    //appointments/filter?status=new&dateFrom=2022-12-14T00:00&dateTo=2022-12-14T23:59&sortBy=bookedDateTime&sortDir=asc
+    //appointments/?status=new&dateFrom=2022-12-14&dateTo=2022-12-30&number=0&size=1&sort=id,desc
     @GetMapping()
     public Page<AppointmentDto> getAppointmentsPaginatedAndFiltered(@PathVariable Long userId,
                                                                     @RequestParam(required = false) AppointmentStatus status,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "#{T(java.time.LocalDate).now()}")
+                                                                    @RequestParam
                                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                     LocalDate dateFrom,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "#{T(java.time.LocalDate).now()}")
+                                                                    @RequestParam
                                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                     LocalDate dateTo,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "0")
-                                                                    Integer page,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "10")
-                                                                    Integer pageSize,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "bookedDateTime")
-                                                                    String sortBy,
-                                                                    @RequestParam(
-                                                                            required = false,
-                                                                            defaultValue = "asc")
-                                                                    String sortDir) throws EntityNotFoundException {
-
-        PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(sortDir), sortBy));
-        return appointmentService.findAppointmentsByUserFilteredAndPaginated(userId, status, dateFrom, dateTo, pageRequest);
+                                                                    Pageable pageable) throws EntityNotFoundException {
+        return appointmentService.findAppointmentsByUserFilteredAndPaginated(userId, status, dateFrom, dateTo, pageable);
     }
 }
