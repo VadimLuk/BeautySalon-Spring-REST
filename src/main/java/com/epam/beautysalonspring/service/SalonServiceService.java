@@ -2,8 +2,9 @@ package com.epam.beautysalonspring.service;
 
 
 import com.epam.beautysalonspring.dto.SalonServiceDto;
+import com.epam.beautysalonspring.exceptions.EntityNotFoundException;
 
-import java.util.List;
+import java.util.Set;
 
 public interface SalonServiceService {
 
@@ -11,7 +12,7 @@ public interface SalonServiceService {
 
     SalonServiceDto updateSalonService(SalonServiceDto salonServiceDto);
 
-    List<SalonServiceDto> getAllSalonServicesInSubcategory(Long subcategoryId);
+    Set<SalonServiceDto> getAllSalonServicesInSubcategory(Long subcategoryId) throws EntityNotFoundException;
 
-    SalonServiceDto getSalonServiceById(Long id);
+    SalonServiceDto getSalonServiceById(Long id) throws EntityNotFoundException;
 }

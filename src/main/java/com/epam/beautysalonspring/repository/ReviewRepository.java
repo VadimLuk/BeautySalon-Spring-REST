@@ -1,11 +1,9 @@
 package com.epam.beautysalonspring.repository;
 
 import com.epam.beautysalonspring.model.Review;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ReviewRepository {
-    List<Review> findAll();
-
-    Review create(Review review);
+@Repository
+public interface ReviewRepository extends PagingAndSortingRepository<Review, Long> {
 }

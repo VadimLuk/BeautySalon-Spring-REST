@@ -48,6 +48,6 @@ public class UserDto {
     @PhoneNumber
     private String phoneNumber;
 
-    @Null(groups = OnCreate.class)
+//    @Null(groups = OnCreate.class)
     private String userStatus;
 }

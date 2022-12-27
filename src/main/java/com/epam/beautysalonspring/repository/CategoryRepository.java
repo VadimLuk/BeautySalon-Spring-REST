@@ -1,15 +1,11 @@
 package com.epam.beautysalonspring.repository;
 
 import com.epam.beautysalonspring.model.Category;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
-public interface CategoryRepository {
-    List<Category> findAll();
-
-    Category create(Category category);
-
-    Category update(Category category);
-
-    Category findById(Long id);
+@Repository
+public interface CategoryRepository extends CrudRepository<Category, Long> {
+    Category findCategoryById(Long id);
 }

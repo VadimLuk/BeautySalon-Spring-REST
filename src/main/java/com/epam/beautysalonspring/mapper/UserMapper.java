@@ -3,9 +3,7 @@ package com.epam.beautysalonspring.mapper;
 import com.epam.beautysalonspring.dto.UserDto;
 import com.epam.beautysalonspring.dto.UserStaffDto;
 import com.epam.beautysalonspring.model.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -24,4 +22,11 @@ public interface UserMapper {
 
     List<UserStaffDto> usersToUserStaffDto(List<User> users);
 
+
+    @Mappings({
+            @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase"),
+            @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
+    })
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateUserFromUserDto(UserDto userDto, @MappingTarget User user);
 }

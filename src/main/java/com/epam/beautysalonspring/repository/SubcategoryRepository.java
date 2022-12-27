@@ -1,15 +1,13 @@
 package com.epam.beautysalonspring.repository;
 
+import com.epam.beautysalonspring.model.Category;
 import com.epam.beautysalonspring.model.Subcategory;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface SubcategoryRepository {
-    List<Subcategory> findByCategory(Long categoryId);
-
-    Subcategory create(Subcategory mapToSubcategory);
-
-    Subcategory update(Subcategory mapToSubcategory);
-
-    Subcategory findById(Long subcategoryId);
+@Repository
+public interface SubcategoryRepository extends CrudRepository<Subcategory, Long> {
+    List<Subcategory> findByCategory(Category category);
 }

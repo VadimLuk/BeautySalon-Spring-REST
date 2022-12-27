@@ -2,6 +2,7 @@ package com.epam.beautysalonspring.dto;
 
 import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.dto.groups.OnUpdate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,5 +24,6 @@ public class SubcategoryDto {
     @Size(min = 3, max = 40)
     private String name;
 
+    @JsonProperty(value = "category-id")
     private Long categoryId;
 }
