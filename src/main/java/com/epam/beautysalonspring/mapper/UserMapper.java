@@ -9,11 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = EnumMapper.class)
 public interface UserMapper {
-
-    @Mappings({
-            @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase"),
-            @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
-    })
+    @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase")
+    @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
     User userDtoToUser(UserDto userDto);
 
     UserDto userToUserDto(User user);
@@ -23,10 +20,8 @@ public interface UserMapper {
     List<UserStaffDto> usersToUserStaffDto(List<User> users);
 
 
-    @Mappings({
-            @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase"),
-            @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
-    })
+    @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase")
+    @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserFromUserDto(UserDto userDto, @MappingTarget User user);
 }
