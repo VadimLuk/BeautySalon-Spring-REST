@@ -1,5 +1,6 @@
 package com.epam.beautysalonspring.mapper;
 
+import com.epam.beautysalonspring.converters.StringCaseConverter;
 import com.epam.beautysalonspring.dto.UserDto;
 import com.epam.beautysalonspring.dto.UserStaffDto;
 import com.epam.beautysalonspring.model.User;
@@ -7,7 +8,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = EnumMapper.class)
+@Mapper(componentModel = "spring", uses = StringCaseConverter.class)
 public interface UserMapper {
     @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase")
     @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")

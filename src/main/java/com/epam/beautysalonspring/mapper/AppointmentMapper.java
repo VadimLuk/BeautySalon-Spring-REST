@@ -1,5 +1,6 @@
 package com.epam.beautysalonspring.mapper;
 
+import com.epam.beautysalonspring.converters.StringCaseConverter;
 import com.epam.beautysalonspring.dto.AppointmentDto;
 import com.epam.beautysalonspring.model.Appointment;
 import com.epam.beautysalonspring.repository.SalonServiceRepository;
@@ -11,7 +12,7 @@ import org.springframework.data.domain.Page;
 @Mapper(
         componentModel = "spring",
         uses = {
-                EnumMapper.class,
+                StringCaseConverter.class,
                 UserRepository.class,
                 SalonServiceRepository.class
         }
