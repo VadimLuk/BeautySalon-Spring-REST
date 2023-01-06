@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper(
         componentModel = "spring",
-        uses = CategoryRepository.class
+        uses = CategoryRepository.class,
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR
 )
 public interface SubcategoryMapper {
     @Mapping(target = "category", source = "categoryId")

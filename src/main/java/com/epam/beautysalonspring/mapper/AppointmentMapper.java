@@ -15,7 +15,8 @@ import org.springframework.data.domain.Page;
                 StringCaseConverter.class,
                 UserRepository.class,
                 SalonServiceRepository.class
-        }
+        },
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR
 )
 public interface AppointmentMapper {
 
@@ -34,11 +35,8 @@ public interface AppointmentMapper {
     @Mapping(target = "clientLastName", source = "client.lastName")
     AppointmentDto mapToAppointmentDto(Appointment appointment);
 
-
-    @Mapping(target = "status", source = "status", qualifiedByName = "toEnumCase")
-    @Mapping(target = "master", source = "masterId")
-    @Mapping(target = "salonService", source = "salonServiceId")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @InheritConfiguration
     void updateAppointmentFromAppointmentDto(AppointmentDto appointmentDto, @MappingTarget Appointment appointment);
 
     default Page<AppointmentDto> mapToAppointmentDtoPage(Page<Appointment> appointments) {
