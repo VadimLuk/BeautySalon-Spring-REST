@@ -1,9 +1,13 @@
 package com.epam.beautysalonspring.controller;
 
 import com.epam.beautysalonspring.dto.CategoryDto;
+import com.epam.beautysalonspring.dto.groups.OnCreate;
+import com.epam.beautysalonspring.dto.groups.OnUpdate;
+import com.epam.beautysalonspring.exceptions.EntityNotFoundException;
 import com.epam.beautysalonspring.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +21,13 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
+    public CategoryDto createCategory(@RequestBody @Validated(OnCreate.class) CategoryDto categoryDto) {
         log.info("Layer: {}, Creating Category: {}", this.getClass().getSimpleName(), categoryDto);
         return categoryService.createCategory(categoryDto);
     }
 
-    @PutMapping("/{id}")
-    public CategoryDto updateCategory(@RequestBody CategoryDto categoryDto) {
+    @PatchMapping("/{id}")
+    public CategoryDto updateCategory(@RequestBody @Validated(OnUpdate.class) CategoryDto categoryDto) {
         log.info("Layer: {}, Updating Category: {}", this.getClass().getSimpleName(), categoryDto);
         return categoryService.updateCategory(categoryDto);
     }
@@ -35,7 +39,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public CategoryDto getCategory(@PathVariable Long id) {
+    public CategoryDto getCategory(@PathVariable Long id) throws EntityNotFoundException {
         log.info("Layer: {}, Getting Category with ID: {}", this.getClass().getSimpleName(), id);
         return categoryService.getCategoryById(id);
     }

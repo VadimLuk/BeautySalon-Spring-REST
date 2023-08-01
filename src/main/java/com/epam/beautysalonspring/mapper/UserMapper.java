@@ -1,21 +1,20 @@
 package com.epam.beautysalonspring.mapper;
 
+import com.epam.beautysalonspring.converters.StringCaseConverter;
 import com.epam.beautysalonspring.dto.UserDto;
 import com.epam.beautysalonspring.dto.UserStaffDto;
 import com.epam.beautysalonspring.model.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = EnumMapper.class)
+@Mapper(componentModel = "spring",
+        uses = StringCaseConverter.class,
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface UserMapper {
 
-    @Mappings({
-            @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase"),
-            @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
-    })
+    @Mapping(target = "role", source = "role", qualifiedByName = "toEnumCase")
+    @Mapping(target = "userStatus", source = "userStatus", qualifiedByName = "toEnumCase")
     User userDtoToUser(UserDto userDto);
 
     UserDto userToUserDto(User user);
@@ -24,4 +23,7 @@ public interface UserMapper {
 
     List<UserStaffDto> usersToUserStaffDto(List<User> users);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @InheritConfiguration
+    void updateUserFromUserDto(UserDto userDto, @MappingTarget User user);
 }
