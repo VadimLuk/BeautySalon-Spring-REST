@@ -1,13 +1,10 @@
 package com.epam.beautysalonspring.controller;
 
 import com.epam.beautysalonspring.dto.SalonServiceDto;
-import com.epam.beautysalonspring.dto.groups.OnCreate;
-import com.epam.beautysalonspring.dto.groups.OnUpdate;
 import com.epam.beautysalonspring.service.SalonServiceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +18,13 @@ public class SalonServiceController {
     private final SalonServiceService salonServiceService;
 
     @PostMapping
-    public SalonServiceDto createSalonService(@RequestBody @Validated(OnCreate.class) SalonServiceDto salonServiceDto) {
+    public SalonServiceDto createSalonService(@RequestBody SalonServiceDto salonServiceDto) {
         log.info("Layer: {}, Creating SalonService: {}", this.getClass().getSimpleName(), salonServiceDto);
         return salonServiceService.createSalonService(salonServiceDto);
     }
 
-    @PatchMapping("/{id}")
-    public SalonServiceDto updateSalonService(@RequestBody @Validated(OnUpdate.class) SalonServiceDto salonServiceDto) {
+    @PutMapping("/{id}")
+    public SalonServiceDto updateSalonService(@RequestBody SalonServiceDto salonServiceDto) {
         log.info("Layer: {}, Updating SalonService: {}", this.getClass().getSimpleName(), salonServiceDto);
         return salonServiceService.updateSalonService(salonServiceDto);
     }

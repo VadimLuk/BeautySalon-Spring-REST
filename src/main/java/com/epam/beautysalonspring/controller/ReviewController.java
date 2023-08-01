@@ -1,11 +1,9 @@
 package com.epam.beautysalonspring.controller;
 
 import com.epam.beautysalonspring.dto.ReviewDto;
-import com.epam.beautysalonspring.dto.groups.OnCreate;
 import com.epam.beautysalonspring.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ReviewDto createReview(@RequestBody @Validated(OnCreate.class) ReviewDto reviewDto) {
+    public ReviewDto createReview(@RequestBody ReviewDto reviewDto) {
         log.info("Layer: {}, Creating Review: {}", this.getClass().getSimpleName(), reviewDto);
         return reviewService.create(reviewDto);
     }
