@@ -1,7 +1,6 @@
 package com.epam.beautysalonspring.service.impl;
 
 import com.epam.beautysalonspring.dto.AppointmentDto;
-import com.epam.beautysalonspring.exceptions.EntityNotFoundException;
 import com.epam.beautysalonspring.mapper.AppointmentMapper;
 import com.epam.beautysalonspring.model.Appointment;
 import com.epam.beautysalonspring.model.User;
@@ -38,22 +37,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDto> findAppointmentsByUser(Long userId) throws EntityNotFoundException {
+    public List<AppointmentDto> findAppointmentsByUser(Long userId) {
         log.info("Layer: {}, Getting All Appointments for User with Id: {}", this.getClass().getSimpleName(), userId);
         User user = userRepository.findById(userId);
-        if (user == null) throw new EntityNotFoundException("User not found");
-
-
         if (user.getRole() == Role.ADMIN) {
             return appointmentMapper.mapToAppointmentDtoList(appointmentRepository.findAll());
         } else {
             return appointmentMapper.mapToAppointmentDtoList(appointmentRepository.findByClientOrMaster(userId));
         }
-    }
-
-    @Override
-    public AppointmentDto findAppointmentById(Long appointmentId) {
-        log.info("Layer: {}, Getting Appointment with Id: {}", this.getClass().getSimpleName(), appointmentId);
-        return appointmentMapper.mapToAppointmentDto(appointmentRepository.findById(appointmentId));
     }
 }
